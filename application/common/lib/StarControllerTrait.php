@@ -16,7 +16,7 @@ use think\Model;
  * Class StarControllerTrait
  * @package app\common\lib
  */
-class StarControllerTrait
+trait StarControllerTrait
 {
     /**
      * 当前控制器对应的模型，需要在手动initialize中初始化

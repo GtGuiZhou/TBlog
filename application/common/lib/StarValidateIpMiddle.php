@@ -9,37 +9,23 @@
 namespace app\common\lib;
 
 
-use think\Model;
+use think\facade\Cache;
+use think\Request;
 
 /**
- * 为控制器拓展点赞功能
+ * 在访问点赞功能之前，调用当前中间件，能够检测同一IP是否点过赞
+ * 点赞过后继续点赞会报错
  * Class StarControllerTrait
  * @package app\common\lib
  */
-class StarValidateTrait
+class StarValidateIpMiddle
 {
-    /**
-     * 当前控制器对应的模型，需要在手动initialize中初始化
-     * @var $model Model
-     */
-    protected $model = null;
-
-    /**
-     * 点赞数量字段名称
-     * @var string $starNumField
-     */
-    protected $starNumField = 'star_num';
-
-    /**
-     * 对指定id模型的点赞数量字段自增1
-     * @param $id
-     * @throws \think\Exception
-     * @throws \think\exception\PDOException
-     */
-    public function star($id){
-        $this->model
-            ->where($this->model->getPk(),$id)
-            ->inc($this->starNumField)
-            ->update();
+    public function handle($request, \Closure $next)
+    {
+        $ip = request()->ip();
+        if (Cache::get("star:ip:$ip")){
+            return warning('您已经点赞过了');
+        }
+        return $next($request);
     }
 }

@@ -10,8 +10,11 @@ namespace app\api\controller;
 
 
 use app\common\controller\ArticleBase;
+use app\common\lib\CrudBaseTrait;
+use app\common\lib\StarControllerTrait;
 
 class ArticleController extends ArticleBase
 {
-
+    use CrudBaseTrait;
+    use StarControllerTrait;
 }
