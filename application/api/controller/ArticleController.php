@@ -9,16 +9,9 @@
 namespace app\api\controller;
 
 
-use app\api\model\ArticleModel;
-use think\Controller;
+use app\common\controller\ArticleBase;
 
-class ArticleController extends Controller
+class ArticleController extends ArticleBase
 {
-    private $model = null;
-    protected function _initialize()
-    {
-        $this->model = new ArticleModel();
-    }
-
 
 }
