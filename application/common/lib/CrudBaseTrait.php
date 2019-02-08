@@ -64,10 +64,11 @@ trait CrudBaseTrait
 
     public function delete()
     {
-        $this->model
-            ->where('id', input('id'))
-            ->delete();
-
+        /**
+         * 这么写是为了能够在模型开启软删除的时候，能够正常使用软删除
+         */
+        $model = $this->model->findOrFail(input('id'));
+        $model->delete();
         return success();
     }
 

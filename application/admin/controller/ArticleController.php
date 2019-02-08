@@ -10,12 +10,14 @@ namespace app\admin\controller;
 
 
 use app\common\lib\CrudBaseTrait;
+use app\common\lib\SoftDeleteControllerTrait;
 use app\common\model\ArticleModel;
 use think\Controller;
 
 class ArticleController extends Controller
 {
     use CrudBaseTrait;
+    use SoftDeleteControllerTrait;
 
     protected function initialize()
     {

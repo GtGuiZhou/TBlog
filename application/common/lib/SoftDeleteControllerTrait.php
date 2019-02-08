@@ -9,6 +9,7 @@
 namespace app\common\lib;
 
 
+use think\exception\ValidateException;
 use think\Model;
 
 /**
@@ -48,4 +49,10 @@ trait SoftDeleteControllerTrait
         return success();
     }
 
+    public function realDelete(){
+        if (!input('?id'))
+            return error('id不存在，请检测是否注册了soft_delete_router_set路由，或者是否在url中携带了id参数');
+        $this->model::destroy(input('id'),true);
+        return success();
+    }
 }
