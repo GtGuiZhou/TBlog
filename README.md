@@ -17,6 +17,7 @@ get方法的article/indexOfTrashed解析为上述路由
 current：用来获取数组当前项
 next:用来将数组内部的指针指向下一项
 key:用来获取当前项的指针
+~~~
 <?php
 $array = array(
     'fruit1' => 'apple',
@@ -34,6 +35,7 @@ while ($fruit_name = current($array)) {
     next($array);
 }
 ?>
+~~~
 ##2019年02月08日14:54:21
 发现v5.1.34的thinkphp框架软删除有问题，进行了修正
 

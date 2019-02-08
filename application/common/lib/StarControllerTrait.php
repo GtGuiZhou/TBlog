@@ -42,4 +42,8 @@ trait StarControllerTrait
             ->inc($this->starNumField)
             ->update();
     }
+
+    public function isStar($id){
+        
+    }
 }
