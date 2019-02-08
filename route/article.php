@@ -9,6 +9,8 @@
 
 crud_router_set('admin/article');
 
+soft_delete_router_set('admin/article');
+
 crud_router_set('api/article');
 
 \think\facade\Route::get('api/article/star/:id','api/article/star')

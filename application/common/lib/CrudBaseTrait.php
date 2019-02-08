@@ -26,17 +26,21 @@ trait CrudBaseTrait
      * @var string
      */
     protected $addAfterResponseType = 'pk';
+
     public function index()
     {
         $order = input('order', 'desc');
-        $page = input('page', 1);
+        $index = input('index', 1);
         $size = input('size', 10);
         $list = $this->model
-            ->where('id', $order)
-            ->page($page, $size)
+            ->order($this->model->getPk(), $order)
+            ->page($index, $size)
             ->select();
-
-        return success($list);
+        $total = $this->model
+            ->count($this->model->getPk());
+        return success(['list' => $list,'page' => [
+            'index' => (int)$index,'size' => (int)$size,'total' =>  (int)$total
+        ]]);
     }
 
     public function read($id)

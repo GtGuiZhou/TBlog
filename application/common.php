@@ -31,14 +31,23 @@ function result($data,$msg,$code){
 
 /**
  * 注册crud路由
- * @param $rule
+ * @param $rule string
  */
 function crud_router_set($rule){
-    think\facade\Route::get("$rule/:id","$rule/read");
-    think\facade\Route::get($rule,"$rule/index");
-    think\facade\Route::post($rule,"$rule/add");
-    think\facade\Route::delete("$rule/:id","$rule/delete");
-    think\facade\Route::put("$rule/:id","$rule/update");
+    think\facade\Route::get("$rule/read/:id","$rule/read");
+    think\facade\Route::get("$rule/index","$rule/index");
+    think\facade\Route::post("$rule/add","$rule/add");
+    think\facade\Route::delete("$rule/delete/:id","$rule/delete");
+    think\facade\Route::put("$rule/update/:id","$rule/update");
+}
+
+/**
+ * 注册软删除路由
+ * @param $rule  string
+ */
+function soft_delete_router_set($rule){
+    think\facade\Route::delete("$rule/realDelete/:id","$rule/realDelete");
+    think\facade\Route::get("$rule/indexOfTrashed","$rule/indexOfTrashed");
 }
 
 /**
