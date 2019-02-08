@@ -34,3 +34,14 @@ while ($fruit_name = current($array)) {
     next($array);
 }
 ?>
+##2019年02月08日14:54:21
+发现v5.1.34的thinkphp框架软删除有问题，进行了修正
+
+##2019年02月08日15:14:16
+发现thinkphp框架的软删除字段时间不会自动转换，所以要手动转换
+~~~
+  public function getDeleteTimeAttr($value)
+   {
+       return date('Y-m-d H:i:s',$value);
+   }
+~~~

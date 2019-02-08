@@ -17,6 +17,12 @@ class ArticleModel extends Model
     use SoftDelete;
     protected $deleteTime = 'delete_time';
     protected $autoWriteTimestamp = true;
+
     protected $pk = 'id';
     protected $table = 'sys_article';
+
+    public function getDeleteTimeAttr($value)
+    {
+        return date('Y-m-d H:i:s',$value);
+    }
 }
