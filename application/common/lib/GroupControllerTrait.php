@@ -10,6 +10,7 @@ namespace app\common\lib;
 
 
 use app\common\model\SysConfigModel;
+use think\exception\ValidateException;
 use think\facade\Cache;
 use think\Model;
 
@@ -22,6 +23,12 @@ trait GroupControllerTrait
      */
     protected $model = null;
 
+    /**
+     * 是否允许修改分组，在初始化中设置
+     * @var bool
+     */
+    protected $allowUpdateGroupTree = true;
+
     public function getGroupTree(){
         $key = $this->getCurrGroupKey();
         // 获取最近的一条配置，这样即使分组配置被损坏也能够还原
@@ -29,7 +36,7 @@ trait GroupControllerTrait
             ->order('id','desc')
             ->cache($key,0)->find();
         if (!$config){
-            $tree = [];
+            $tree = [['label' => 'root', 'path' => 'root/', 'children' => []]];
         } else {
             $tree = $config['value'];
         }
@@ -44,11 +51,17 @@ trait GroupControllerTrait
      * @throws \think\exception\PDOException
      */
     public function updateGroupTree(){
+        if (!$this->allowUpdateGroupTree)
+            throw new ValidateException('不允许修改分组');
         $key = $this->getCurrGroupKey();
+        $tree = input('tree');
+        if (count($tree) < 1){
+            throw new ValidateException('子节点不能为空');
+        }
         // 添加数据
         SysConfigModel::create([
             'config_name'   => $key,
-            'value'         => input('tree')
+            'value'         => $tree
         ]);
         // 更新缓存
         Cache::rm($key);

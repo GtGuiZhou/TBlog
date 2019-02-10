@@ -6,7 +6,7 @@
  * Time: 下午12:25
  */
 
-namespace app\api\controller;
+namespace app\admin\controller;
 
 
 use app\common\model\SysConfigModel;

@@ -16,6 +16,7 @@ class SysConfigModel extends Model
     protected $table = 'sys_config';
     protected $autoWriteTimestamp = true;
     protected $json = ['value'];
+
     // 追加属性
     protected $append = [
         'create_time_text',
