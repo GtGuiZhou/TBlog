@@ -11,6 +11,7 @@ namespace app\common\controller;
 
 use app\common\model\UploadModel;
 use think\Controller;
+use think\File;
 
 class UploadBase extends Controller
 {
@@ -79,18 +80,21 @@ class UploadBase extends Controller
             ]);
         }
         // 移动到框架应用根目录/uploads/ 目录下
+        /**
+         * @var $file File
+         */
         $info = $file
             ->validate(['size'=>$this->limitUploadSize * 1024 * 1024,'ext'=>$this->allowUploadExt])
             ->move( '../uploads');
 
-        $model = UploadModel::create([
+        if($info){
+            $model = UploadModel::create([
                 // 文件名称当前系统时间微秒的md5值
                 'filename' => $info->getFileName(),
                 'url'      => request()->domain() . '/api/upload/read?filename='.$info->getFileName(),
                 'local'     => $info->getSaveName(),
                 'device'   => 'local',
-                ]);
-        if($info){
+            ]);
             return json([
                'code' => 0,
                'msg'  => 'success',

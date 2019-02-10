@@ -40,7 +40,7 @@ class SysConfigController extends Controller
      * 更新系统配置
      * @return \think\response\Json
      */
-    public function updateGroupTree(){
+    public function update(){
         $key = input('key',false);
         if (!$key)
             throw new ValidateException('key不能为空');
