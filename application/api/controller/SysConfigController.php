@@ -30,7 +30,7 @@ class SysConfigController extends Controller
             throw new ValidateException('key不能为空');
         // 获取最近的一条配置，这样即使配置被损坏也能够还原
         $config = SysConfigModel::where('config_name', $key)
-            ->order('id','desc')
+            ->order('create_time','desc')
             ->cache($key,0)->find();
 
         return success($config);

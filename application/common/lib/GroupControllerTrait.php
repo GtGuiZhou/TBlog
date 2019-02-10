@@ -33,7 +33,7 @@ trait GroupControllerTrait
         $key = $this->getCurrGroupKey();
         // 获取最近的一条配置，这样即使分组配置被损坏也能够还原
         $config = SysConfigModel::where('config_name', $key)
-            ->order('id','desc')
+            ->order('create_time','desc')
             ->cache($key,0)->find();
         if (!$config){
             $tree = [['label' => 'root', 'path' => 'root/', 'children' => []]];
