@@ -102,9 +102,9 @@ class UploadBase extends Controller
             ]);
         }else{
             return json([
-                'code' => 0,
-                'msg'  => 'success',
-                'data' => $file->getError()
+                'code' => 1012,
+                'msg'  => $file->getError(),
+                'data' => null
             ]);
         }}
 
