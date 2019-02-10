@@ -8,10 +8,8 @@
 
 use think\facade\Route;
 
-Route::post('admin/upload/image','admin/upload/image')->allowCrossDomain(true);
-Route::get('admin/upload','admin/upload/read');
-Route::get('admin/upload/image','admin/upload/read');
+Route::post('admin/upload/file','admin/upload/file')->allowCrossDomain(true);
+Route::get('admin/upload/read','admin/upload/read');
 
-Route::post('api/upload/image','api/upload/image')->allowCrossDomain(true);
-Route::get('api/upload','api/upload/read');
-Route::get('api/upload/image','api/upload/read');
+Route::post('api/upload/file','api/upload/file')->allowCrossDomain(true);
+Route::get('api/upload/read','api/upload/read');

@@ -6,7 +6,7 @@
  * Time: 下午12:46
  */
 
-namespace app\admin\model;
+namespace app\common\model;
 
 
 use think\Model;
@@ -15,7 +15,7 @@ class SysConfigModel extends Model
 {
     protected $table = 'sys_config';
     protected $autoWriteTimestamp = true;
-
+    protected $json = ['value'];
     // 追加属性
     protected $append = [
         'create_time_text',

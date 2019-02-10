@@ -43,8 +43,9 @@ trait CrudBaseTrait
         ]]);
     }
 
-    public function read($id)
+    public function read()
     {
+        $id = input('id');
         return success($this->model->where($this->model->getPk(),$id)->findOrFail());
     }
 

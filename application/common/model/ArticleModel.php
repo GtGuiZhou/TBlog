@@ -15,6 +15,7 @@ use think\model\concern\SoftDelete;
 class ArticleModel extends Model
 {
     use SoftDelete;
+
     protected $deleteTime = 'delete_time';
     protected $autoWriteTimestamp = true;
 
@@ -25,4 +26,7 @@ class ArticleModel extends Model
     {
         return date('Y-m-d H:i:s',$value);
     }
+
+
+
 }

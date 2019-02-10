@@ -21,6 +21,18 @@ class UploadBase extends Controller
      */
     private $model = null;
 
+    /**
+     * 现在上传文件大小（单位：M)
+     * @var int $limitUploadSize
+     */
+    protected $limitUploadSize = 2;
+
+    /**
+     * 允许上传的文件拓展
+     * @var string $allowUploadExt
+     */
+    protected $allowUploadExt  = 'bmp,jpeg,jpg,png,gif';
+
     public function initialize()
     {
         $this->model = new UploadModel();
@@ -53,8 +65,12 @@ class UploadBase extends Controller
         return download('../uploads/'.$file['local'],time(),false,360,true);
     }
 
-    public function image(){   // 获取表单上传文件 例如上传了001.jpg
-        $file = request()->file('image');
+    /**
+     * 上传文件
+     * @return \think\response\Json
+     */
+    public function file(){
+        $file = request()->file('file');
         if (!$file){
             return json([
                 'code' => 1011,
@@ -64,13 +80,13 @@ class UploadBase extends Controller
         }
         // 移动到框架应用根目录/uploads/ 目录下
         $info = $file
-            ->validate(['size'=>2097152,'ext'=>'bmp,jpeg,jpg,png,gif'])
+            ->validate(['size'=>$this->limitUploadSize * 1024 * 1024,'ext'=>$this->allowUploadExt])
             ->move( '../uploads');
 
         $model = UploadModel::create([
                 // 文件名称当前系统时间微秒的md5值
                 'filename' => $info->getFileName(),
-                'url'      => request()->domain() . '/api/upload/image?filename='.$info->getFileName(),
+                'url'      => request()->domain() . '/api/upload/read?filename='.$info->getFileName(),
                 'local'     => $info->getSaveName(),
                 'device'   => 'local',
                 ]);
@@ -87,4 +103,13 @@ class UploadBase extends Controller
                 'data' => $file->getError()
             ]);
         }}
+
+
+        /**
+         * 添加允许上传的文件类型
+         * @param $ext string
+         */
+        protected function appendAllowExt($ext){
+            $this->allowUploadExt = "$this->allowUploadExt,$ext";
+        }
 }

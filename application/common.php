@@ -51,6 +51,15 @@ function soft_delete_router_set($rule){
 }
 
 /**
+ * 注册分组路由
+ * @param $rule  string
+ */
+function group_router_set($rule){
+    think\facade\Route::get("$rule/getGroupTree","$rule/getGroupTree");
+    think\facade\Route::put("$rule/updateGroupTree","$rule/updateGroupTree");
+}
+
+/**
  * 获取当前会话用户，不存在抛异常
  */
 function user(){
