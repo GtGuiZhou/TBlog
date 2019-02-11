@@ -14,8 +14,8 @@ use think\Model;
 
 class FileSysModel extends Model
 {
-    protected $table = 'sys_upload';
+    protected $table = 'sys_file';
     protected $pk = 'id';
     protected $autoWriteTimestamp = true;
-    protected $hidden = ['local'];
+    protected $hidden = ['local_path'];
 }

@@ -56,21 +56,27 @@ class FilesysBase extends Controller
                 ->findOrFail();
 
         if ($file['device'] == 'local'){
-            return $this->localFileResponse($file);
+            return $this->localFileResponse($file,input('?unOpeninBrowser'));
         } else {
             return redirect($file['url']);
         }
     }
 
-    private function localFileResponse($file){
-        return download('../uploads/'.$file['local'],time(),false,360,true);
+    /**
+     * 下载本地的文件
+     * @param $file
+     * @param bool $unOpeninBrowser 是否不在浏览器中打开，意思就是如果是图像这个参数为false那么就直接显示图片，而不是下载图片
+     * @return \think\response\Download
+     */
+    private function localFileResponse($file,$unOpeninBrowser = false){
+        return download('../uploads/'.$file['local_path'],time(),false,360,$unOpeninBrowser);
     }
 
     /**
      * 上传文件
      * @return \think\response\Json
      */
-    public function file(){
+    public function upload(){
         $file = request()->file('file');
         if (!$file){
             return json([
@@ -92,7 +98,8 @@ class FilesysBase extends Controller
                 // 文件名称当前系统时间微秒的md5值
                 'filename' => $info->getFileName(),
                 'url'      => request()->domain() . '/api/filesys/read?filename='.$info->getFileName(),
-                'local'     => $info->getSaveName(),
+                'local_path'    => $info->getSaveName(),
+                'mime'     => $info->getMime(),
                 'device'   => 'local',
             ]);
             return json([
