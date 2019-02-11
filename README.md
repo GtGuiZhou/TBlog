@@ -84,3 +84,7 @@ while ($fruit_name = current($array)) {
 
 ## 软删除——坑
 如果update操作中含有delete_time字段导致，更新数据变成了删除数据
+~~~
+// 可以通过设定delete_time为只读字段解决
+protected $readonly = ['delete_time'];
+~~~
