@@ -81,3 +81,6 @@ while ($fruit_name = current($array)) {
        return date('Y-m-d H:i:s',$value);
    }
 ~~~
+
+## 软删除——坑
+如果update操作中含有delete_time字段导致，更新数据变成了删除数据
