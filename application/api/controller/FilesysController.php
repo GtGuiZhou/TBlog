@@ -9,9 +9,9 @@
 namespace app\api\controller;
 
 
-use app\common\controller\UploadBase;
+use app\common\controller\FilesysBase;
 
-class UploadController extends UploadBase
+class FilesysController extends FilesysBase
 {
 
 }

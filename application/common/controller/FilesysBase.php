@@ -9,18 +9,18 @@
 namespace app\common\controller;
 
 
-use app\common\model\UploadModel;
+use app\common\model\FileSysModel;
 use think\Controller;
 use think\File;
 
-class UploadBase extends Controller
+class FilesysBase extends Controller
 {
 
     /**
      * 上传模型
-     * @var $model UploadModel
+     * @var $model FileSysModel
      */
-    private $model = null;
+    protected $model = null;
 
     /**
      * 现在上传文件大小（单位：M)
@@ -36,7 +36,7 @@ class UploadBase extends Controller
 
     public function initialize()
     {
-        $this->model = new UploadModel();
+        $this->model = new FileSysModel();
     }
 
     public function index(){
@@ -88,10 +88,10 @@ class UploadBase extends Controller
             ->move( '../uploads');
 
         if($info){
-            $model = UploadModel::create([
+            $model = FileSysModel::create([
                 // 文件名称当前系统时间微秒的md5值
                 'filename' => $info->getFileName(),
-                'url'      => request()->domain() . '/api/upload/read?filename='.$info->getFileName(),
+                'url'      => request()->domain() . '/api/filesys/read?filename='.$info->getFileName(),
                 'local'     => $info->getSaveName(),
                 'device'   => 'local',
             ]);

@@ -12,7 +12,7 @@ namespace app\common\model;
 use think\Model;
 
 
-class UploadModel extends Model
+class FileSysModel extends Model
 {
     protected $table = 'sys_upload';
     protected $pk = 'id';

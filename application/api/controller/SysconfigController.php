@@ -14,7 +14,7 @@ use think\Controller;
 use think\exception\ValidateException;
 use think\facade\Cache;
 
-class SysConfigController extends Controller
+class SysconfigController extends Controller
 {
 
     /**
