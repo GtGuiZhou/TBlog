@@ -18,7 +18,7 @@ class ArticleModel extends Model
 
     protected $deleteTime = 'delete_time';
     protected $autoWriteTimestamp = true;
-
+    protected $readonly = ['delete_time'];
     protected $pk = 'id';
     protected $table = 'sys_article';
 

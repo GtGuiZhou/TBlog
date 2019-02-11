@@ -32,7 +32,7 @@ class FilesysBase extends Controller
      * 允许上传的文件拓展
      * @var string $allowUploadExt
      */
-    protected $allowUploadExt  = 'bmp,jpeg,jpg,png,gif';
+    protected $allowUploadExt  = 'bmp,jpeg,jpg,png,gif,mp3,mp4';
 
     public function initialize()
     {

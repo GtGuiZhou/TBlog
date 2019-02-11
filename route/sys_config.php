@@ -7,8 +7,7 @@
  */
 use think\facade\Route;
 
-Route::get('api/SysconfigController/read/:key','api/SysconfigController/read');
-Route::put('api/SysconfigController/update/:key','api/SysconfigController/update');
-
-Route::get('admin/SysconfigController/read/:key','admin/SysconfigController/read');
-Route::put('admin/SysconfigController/update/:key','admin/SysconfigController/update');
+Route::get('api/sysconfig/read/:key','api/Sysconfig/read');
+Route::put('api/sysconfig/update/:key','api/Sysconfig/update');
+Route::get('admin/sysconfig/read/:key','admin/Sysconfig/read');
+Route::put('admin/sysconfig/update/:key','admin/Sysconfig/update');
