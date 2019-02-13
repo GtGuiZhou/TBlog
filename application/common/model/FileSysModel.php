@@ -18,4 +18,6 @@ class FileSysModel extends Model
     protected $pk = 'id';
     protected $autoWriteTimestamp = true;
     protected $hidden = ['local_path'];
+
+
 }

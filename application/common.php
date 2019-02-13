@@ -48,6 +48,7 @@ function crud_router_set($rule){
 function soft_delete_router_set($rule){
     think\facade\Route::delete("$rule/realDelete/:id","$rule/realDelete");
     think\facade\Route::get("$rule/indexOfTrashed","$rule/indexOfTrashed");
+    think\facade\Route::get("$rule/recover","$rule/recover");
 }
 
 /**

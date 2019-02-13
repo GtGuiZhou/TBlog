@@ -36,6 +36,7 @@ trait SoftDeleteControllerTrait
             ->page($index, $size)
             ->select();
         $total = $this->model
+            ::onlyTrashed()  // 该方法必须在model中 use SoftDelete;才存在
             ->count($this->model->getPk());
         return success(['list' => $list,'page' => [
             'index' => (int)$index,'size' => (int)$size,'total' =>  (int)$total

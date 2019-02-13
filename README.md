@@ -84,7 +84,14 @@ while ($fruit_name = current($array)) {
 
 ## 软删除——坑
 如果update操作中含有delete_time字段导致，更新数据变成了删除数据
-~~~
-// 可以通过设定delete_time为只读字段解决
-protected $readonly = ['delete_time'];
-~~~
+
+软删除会调用模型的save方法，对delete_time字段进行修改，所有不建议重写save方法，而是用模型事件before_insert代替。
+
+## 闭包——坑
+| 版本        | 更新内容    |  可否在匿名函数中使用$this  |
+| --------   | -----:   | :----: |
+| >=7.1.0        | 闭包可以从父作用域中继承变量。 任何此类变量都应该用 use 语言结构传递进去。 PHP 7.1 起，不能传入此类变量： superglobals、 $this 或者和参数重名。      |   N    |
+| >=5.4.0        | $this 可用于匿名函数。      |   Y    |
+| >=5.3.0        | 可以使用匿名函数。      |   N    |
+
+7.1后不能使用$this了，也找不到方法在匿名方法中使用$this

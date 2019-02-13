@@ -75,6 +75,12 @@ trait CrudBaseTrait
 
     public function update()
     {
+        $data = input();
+        // 不允许更新软删除字段
+        if ($this->model->deleteTime){
+            unset($data[$this->model->deleteTime]);
+        }
+
         $this->model
             ->isUpdate(true)
             ->save(input());
