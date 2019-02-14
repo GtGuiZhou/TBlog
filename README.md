@@ -95,3 +95,7 @@ while ($fruit_name = current($array)) {
 | >=5.3.0        | 可以使用匿名函数。      |   N    |
 
 7.1后不能使用$this了，也找不到方法在匿名方法中使用$this
+
+## app_debug = true显示异常信息
+在开发程序的时候开启app_debug会出现这种错误提示，把app_debug = false就行啦
+![avatar](./public/static/image/QQ图片20190213183323.png)
