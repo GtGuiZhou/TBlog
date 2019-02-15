@@ -53,9 +53,7 @@ class SysconfigBase extends Controller
         $key = input('key',false);
         if (!$key)
             throw new ValidateException('key不能为空');
-        $value = input('value',false);
-        if (!$value)
-            throw new ValidateException('value不能为空');
+        $value = input('value');
 
         // 添加数据
         SysConfigModel::create([
