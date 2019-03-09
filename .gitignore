@@ -3,3 +3,4 @@ composer.lock
 *.log
 .env
 public/uploads/
+public/.user.ini
