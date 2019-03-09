@@ -10,9 +10,15 @@ namespace app\admin\controller;
 
 
 use app\common\controller\FilesysBase;
+use app\common\model\FileSysModel;
 
 class FilesysController extends FilesysBase
 {
+
+    /**
+     * @var FileSysModel
+     */
+    protected $model = null;
 
     public function index()
     {

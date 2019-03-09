@@ -99,3 +99,6 @@ while ($fruit_name = current($array)) {
 ## app_debug = true显示异常信息
 在开发程序的时候开启app_debug会出现这种错误提示，把app_debug = false就行啦
 ![avatar](./public/static/image/QQ图片20190213183323.png)
+
+## 发现宝塔面板在public下生成的.USER.INI导致php文件出现４０４情况
+删除即可解决问题

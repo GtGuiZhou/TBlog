@@ -17,7 +17,7 @@ trait CrudBaseTrait
      * 当前控制器对应的模型，需要在手动initialize中初始化
      * @var $model Model
      */
-    protected $model = null;
+//    protected $model = null;
 
     /**
      * 执行add方法后的返回值类型,可选model或者null或者pk

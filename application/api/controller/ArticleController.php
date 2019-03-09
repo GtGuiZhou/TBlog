@@ -9,13 +9,13 @@
 namespace app\api\controller;
 
 
-use app\common\controller\ArticleBase;
 use app\common\lib\CrudBaseTrait;
 use app\common\lib\GroupControllerTrait;
 use app\common\lib\StarControllerTrait;
 use app\common\model\ArticleModel;
+use think\Controller;
 
-class ArticleController extends ArticleBase
+class ArticleController extends Controller
 {
     use CrudBaseTrait;
     use StarControllerTrait;

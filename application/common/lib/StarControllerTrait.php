@@ -22,7 +22,7 @@ trait StarControllerTrait
      * 当前控制器对应的模型，需要在手动initialize中初始化
      * @var $model Model
      */
-    protected $model = null;
+//    protected $model = null;
 
     /**
      * 点赞数量字段名称

@@ -21,6 +21,7 @@ class ArticleController extends Controller
     use SoftDeleteControllerTrait;
     use GroupControllerTrait;
 
+
     protected $groupTableName = 'sys_article_group';
 
     /**
@@ -33,4 +34,21 @@ class ArticleController extends Controller
         $this->model = new ArticleModel();
     }
 
+    public function add()
+    {
+        $this->validate(input(),[
+            'title|标题' => 'require|length:1,255',
+            'cover|封面' => 'require|url',
+        ]);
+        $this->model->allowField(true)->save(input());
+        switch ($this->addAfterResponseType){
+            case 'model':
+                return success($this->model);
+            case 'pk':
+                $pk = $this->model->getpk();
+                return success([$pk => $this->model->$pk]);
+            default:
+                return success();
+        }
+    }
 }

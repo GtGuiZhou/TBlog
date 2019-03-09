@@ -33,12 +33,13 @@ class SysconfigBase extends Controller
      */
     public function read(){
         $key = input('key',false);
+        $expire = config('APP_DEBUG')?-1:0;
         if (!$key)
             throw new ValidateException('key不能为空');
         // 获取最近的一条配置，这样即使配置被损坏也能够还原
         $config = SysConfigModel::where('config_name', $key)
             ->order('create_time','desc')
-            ->cache($key,0)->find();
+            ->cache($key,$expire)->find();
         if (!$config && isset($this->configDefault[$key])){
             $config = $this->configDefault[$key];
         }

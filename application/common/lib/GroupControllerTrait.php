@@ -21,7 +21,7 @@ trait GroupControllerTrait
      * 当前控制器对应的模型
      * @var $model Model
      */
-    protected $model = null;
+//    protected $model = null;
 
     /**
      * 是否允许修改分组，在初始化中设置
