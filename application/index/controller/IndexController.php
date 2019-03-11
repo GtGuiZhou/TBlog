@@ -5,11 +5,11 @@ class IndexController
 {
     public function index()
     {
-        throw new ValidateException('2312213213231');
     }
 
     public function hello($name = 'ThinkPHP5')
     {
+        echo 'test';
         return 'hello,' . $name;
     }
 }
