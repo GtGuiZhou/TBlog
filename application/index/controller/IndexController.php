@@ -9,7 +9,7 @@ class IndexController
 
     public function hello($name = 'ThinkPHP5')
     {
-        echo 'test12';
+        echo 'tes55t12';
         return 'hello,' . $name;
     }
 }
