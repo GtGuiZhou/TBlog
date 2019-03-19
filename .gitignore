@@ -4,3 +4,5 @@ composer.lock
 .env
 public/uploads/
 public/.user.ini
+public/static/confront
+public/static/admin
