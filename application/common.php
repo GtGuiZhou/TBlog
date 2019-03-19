@@ -85,3 +85,7 @@ function user(){
 function user_is_login(){
     return \think\facade\Session::get('user')?true:false;
 }
+
+function throw_validate_exception($err, $code = 0){
+    throw  new \think\exception\ValidateException($err,$code);
+}

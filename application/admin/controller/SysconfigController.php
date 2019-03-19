@@ -9,9 +9,23 @@
 namespace app\admin\controller;
 
 
-use app\common\controller\SysconfigBase;
+use app\common\controller\AdminBase;
+use app\common\model\SysConfigModel;
 
-class SysconfigController extends SysconfigBase
+class SysconfigController extends AdminBase
 {
 
+    protected $addAfterResponseType = 'model';
+
+    protected function initialize()
+    {
+        $this->model = new SysConfigModel();
+    }
+
+    public function add()
+    {
+        if ($this->model->where('field',input('field'))->find())
+            throw_validate_exception('该字段已存在');
+        return parent::add();
+    }
 }

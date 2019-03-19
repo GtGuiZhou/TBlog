@@ -9,13 +9,9 @@
 namespace app\common\model;
 
 
-use think\Model;
-
-class SysConfigModel extends Model
+class SysConfigModel extends BaseModel
 {
     protected $table = 'sys_config';
-    protected $autoWriteTimestamp = true;
-    protected $json = ['value'];
 
     // 追加属性
     protected $append = [
@@ -23,16 +19,19 @@ class SysConfigModel extends Model
         'update_time_text'
     ];
 
-    public function getCreateTimeTextAttr($value, $data)
-    {
-        $value = $value ? $value : (isset($data['release_time']) ? $data['release_time'] : '');
-        return is_numeric($value) ? date("Y-m-d H:i:s", $value) : $value;
+    public function setValueAttr($value){
+        if (is_array($value) || is_object($value)){
+            return json_encode($value);
+        } else {
+            return $value;
+        }
     }
 
-    public function getUpdateTimeTextAttr($value, $data)
-    {
-        $value = $value ? $value : (isset($data['release_time']) ? $data['release_time'] : '');
-        return is_numeric($value) ? date("Y-m-d H:i:s", $value) : $value;
+    public function getValueAttr($value,$data){
+        $decode = json_decode($value,true);
+        if ($decode)
+            return $decode;
+        else
+            return $value;
     }
-
 }
