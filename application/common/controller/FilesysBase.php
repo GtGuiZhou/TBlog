@@ -85,13 +85,13 @@ class FilesysBase extends Controller
                 'data' => null
             ]);
         }
-        // 移动到框架应用根目录/uploads/ 目录下
+        // 移动到框架应用/public/uploads/ 目录下
         /**
          * @var $file File
          */
         $info = $file
             ->validate(['size'=>$this->limitUploadSize * 1024 * 1024,'ext'=>$this->allowUploadExt])
-            ->move( '../uploads');
+            ->move( './uploads');
 
         if($info){
             $model = FileSysModel::create([
