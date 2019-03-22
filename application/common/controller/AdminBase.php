@@ -14,6 +14,13 @@ use think\Model;
 
 class AdminBase extends Controller
 {
+
+    /**
+     * 软删除字段，会在更新数据时过滤该字段
+     * @var string
+     */
+    protected $deleteTimeField = 'delete_time';
+
     /**
      * 当前控制器对应的模型，需要在手动initialize中初始化
      * @var $model Model
@@ -82,15 +89,12 @@ class AdminBase extends Controller
 
     public function update()
     {
-        $data = input();
-        // 不允许更新软删除字段
-        if (isset($this->model->deleteTime) && $this->model->deleteTime){
-            unset($data[$this->model->deleteTime]);
-        }
 
-        $this->model
-            ->isUpdate(true)
-            ->save(input());
+        $model =  $this->model->findOrFail(input('id'));
+        $data = input();
+        unset($data[$this->deleteTimeField]);
+        $model->isUpdate(true)
+            ->save($data);
 
         return success();
     }

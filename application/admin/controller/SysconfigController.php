@@ -28,4 +28,15 @@ class SysconfigController extends AdminBase
             throw_validate_exception('该字段已存在');
         return parent::add();
     }
+
+    public function indexAll()
+    {
+        // 将索引变为field
+        $res = $this->model->select();
+        $config = [];
+        foreach ($res as &$val){
+            $config[$val['field']] = $val;
+        }
+        return success($config);
+    }
 }

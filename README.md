@@ -102,3 +102,22 @@ while ($fruit_name = current($array)) {
 
 ## 发现宝塔面板在public下生成的.USER.INI导致php文件出现４０４情况
 删除即可解决问题
+
+## 开发文章标签同步时遇到的坑
+ps：以后做定时任务的时候可以直接坐在一个php脚本里面，让这个php脚本一直运行。
+可以通过web请求使用redis，但是使用命令行调用redis就出现不能找到redis模块的情况。
+1.通过`php -m`在命令行下发现没有redis模块。
+2.通过`php --init`命令查看当前配置，发现cli的配置在/etc/php/7.2/cli，与nginx的配置不同，因此没有redis。
+3.在`/etc/php/7.2/cli/php.ini`末尾加入如下代码，这次报错信息变了。
+```
+[redis]
+extension = /www/server/php/72/lib/php/extensions/no-debug-non-zts-20170718/redis.so
+# 报错信息
+#[PDOException]         
+#could not find driver 
+```
+4.一开始我以为是redis的问题，后来才想到redis用个鬼的pdo，原来是cli模式下mysql使用的pdo也有问题。
+5.为了不影响进度，暂时搁置这个问题，目前redis以及可以用在php cli下，但是pdo还不知道要怎么弄才行。[todo]
+6.打算先用swoole实现定时功能。
+
+

@@ -19,6 +19,7 @@ class SysConfigModel extends BaseModel
         'update_time_text'
     ];
 
+
     public function setValueAttr($value){
         if (is_array($value) || is_object($value)){
             return json_encode($value);
@@ -32,6 +33,9 @@ class SysConfigModel extends BaseModel
         if ($decode)
             return $decode;
         else
-            return $value;
+            if($data['type'] ==  'json')
+                return [];
+            else
+                return $value;
     }
 }

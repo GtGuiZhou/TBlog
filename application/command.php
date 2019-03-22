@@ -9,4 +9,6 @@
 // | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
 
-return [];
+return [
+    'sync_article_tags' => 'app\command\SyncArticleTags'
+];
