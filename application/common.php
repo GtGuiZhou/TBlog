@@ -38,6 +38,8 @@ function crud_router_set($rule){
     think\facade\Route::get("$rule/index","$rule/index");
     think\facade\Route::post("$rule/add","$rule/add");
     think\facade\Route::delete("$rule/delete/:id","$rule/delete");
+    think\facade\Route::delete("$rule/deleteReal/:id","$rule/deleteReal");
+    think\facade\Route::put("$rule/recover/:id","$rule/recover");
     think\facade\Route::put("$rule/update/:id","$rule/update");
 }
 

@@ -17,6 +17,7 @@ class BaseModel extends Model
     public $autoWriteTimestamp = true;
     public $dateFormat = false;
 
+
     // 只要append属性中有，就自动转换
     public function getCreateTimeTextAttr($value, $data)
     {

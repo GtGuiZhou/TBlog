@@ -10,15 +10,10 @@ namespace app\admin\controller;
 
 
 use app\common\controller\AdminBase;
-use app\common\lib\GroupControllerTrait;
-use app\common\lib\SoftDeleteControllerTrait;
 use app\common\model\ArticleModel;
 
 class ArticleController extends AdminBase
 {
-    use SoftDeleteControllerTrait;
-    use GroupControllerTrait;
-
 
     protected $groupTableName = 'sys_article_group';
 

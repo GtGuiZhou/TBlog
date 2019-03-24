@@ -46,9 +46,7 @@ class FilesysBase extends Controller
         }
     }
 
-    public function config(){
-        return json(json_decode());
-    }
+
 
     public function read(){
         $file = $this->model
@@ -69,7 +67,7 @@ class FilesysBase extends Controller
      * @return \think\response\Download
      */
     private function localFileResponse($file,$unOpeninBrowser = false){
-        return download('../uploads/'.$file['local_path'],time(),false,360,$unOpeninBrowser);
+        return download('./uploads/'.$file['local_path'],time(),false,360,$unOpeninBrowser);
     }
 
     /**

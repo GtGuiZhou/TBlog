@@ -9,6 +9,7 @@
 namespace app\common\controller;
 
 
+use app\common\model\MusicModel;
 use think\Controller;
 use think\Model;
 
@@ -36,6 +37,13 @@ class AdminBase extends Controller
     protected $addAfterResponseType = 'pk';
 
 
+    /**
+     * 获取分页数据
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function index()
     {
         $order = input('order', 'desc');
@@ -53,16 +61,51 @@ class AdminBase extends Controller
         ]]);
     }
 
+    /**
+     * 获取全部数据
+     * @return \think\response\Json
+     */
     public function indexAll(){
         return success($this->model->select());
     }
 
+    /**
+     * 获取软删除数据
+     * @return \think\response\Json
+     */
+    public function indexOfTrashed(){
+        $order = input('order', 'desc');
+        $index = input('index', 1);
+        $size = input('size', 10);
+
+        $list = $this->model::onlyTrashed()
+            ->order($this->model->getPk(), $order)
+            ->page($index, $size)
+            ->select();
+        $total = $this->model::onlyTrashed()
+            ->count($this->model->getPk());
+        return success(['list' => $list,'page' => [
+            'index' => (int)$index,'size' => (int)$size,'total' =>  (int)$total
+        ]]);
+    }
+
+    /**
+     * 读指定数据
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function read()
     {
         $id = input('id');
         return success($this->model->where($this->model->getPk(),$id)->findOrFail());
     }
 
+    /**
+     * 新增一条数据
+     * @return \think\response\Json
+     */
     public function add()
     {
         $this->model->allowField(true)->save(input());
@@ -77,6 +120,13 @@ class AdminBase extends Controller
         }
     }
 
+    /**
+     * 删除指定数据
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function delete()
     {
         /**
@@ -87,6 +137,37 @@ class AdminBase extends Controller
         return success();
     }
 
+    /**
+     * 真实删除数据（开启软删除的时候有效）
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function deleteReal(){
+        $model = $this->model->findOrFail(input('id'));
+        $model->delete(true);
+        return success();
+    }
+
+    /**
+     * 恢复被软删除的数据
+     * @return \think\response\Json
+     */
+    public function recover(){
+        $model = $this->model::onlyTrashed()->findOrFail(input('id'));
+        $model->restore();
+        return success();
+    }
+
+
+    /**
+     * 更新指定数据
+     * @return \think\response\Json
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function update()
     {
 
