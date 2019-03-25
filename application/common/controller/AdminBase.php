@@ -145,7 +145,7 @@ class AdminBase extends Controller
      * @throws \think\exception\DbException
      */
     public function deleteReal(){
-        $model = $this->model->findOrFail(input('id'));
+        $model = $this->model::onlyTrashed()->findOrFail(input('id'));
         $model->delete(true);
         return success();
     }

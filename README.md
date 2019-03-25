@@ -120,4 +120,36 @@ extension = /www/server/php/72/lib/php/extensions/no-debug-non-zts-20170718/redi
 5.为了不影响进度，暂时搁置这个问题，目前redis以及可以用在php cli下，但是pdo还不知道要怎么弄才行。[todo]
 6.打算先用swoole实现定时功能。
 
+## 安装swoole遇到的坑
+使用composer安装一直安装不上，原来是php没有安装swoole拓展的原因
+```
+Your requirements could not be resolved to an installable set of packages.
+
+  Problem 1
+    - topthink/think-swoole v2.0.9 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system. # composer 提醒你没有发现ext-swoole拓展。。。。
+    - topthink/think-swoole v2.0.8 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.7 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.6 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.5 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.4 requires ext-swoole >=1.8 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.3 requires ext-swoole >=1.8 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.2 requires ext-swoole >=1.8 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.16 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.15 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.14 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.13 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.12 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.11 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.10 requires ext-swoole >=1.9.5 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.1 requires ext-swoole >=1.8 -> the requested PHP extension swoole is missing from your system.
+    - topthink/think-swoole v2.0.0 requires ext-swoole >=1.8 -> the requested PHP extension swoole is missing from your system.
+    - Installation request for topthink/think-swoole ^2.0 -> satisfiable by topthink/think-swoole[v2.0.0, v2.0.1, v2.0.10, v2.0.11, v2.0.12, v2.0.13, v2.0.14, v2.0.15, v2.0.16, v2.0.2, v2.0.3, v2.0.4, v2.0.5, v2.0.6, v2.0.7, v2.0.8, v2.0.9].
+
+  To enable extensions, verify that they are enabled in your .ini files:
+    - /www/server/php/73/etc/php.ini
+  You can also run `php --ini` inside terminal to see which files are used by PHP in CLI mode.
+
+
+```
+
 
