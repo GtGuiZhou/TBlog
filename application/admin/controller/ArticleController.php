@@ -17,10 +17,6 @@ class ArticleController extends AdminBase
 
     protected $groupTableName = 'sys_article_group';
 
-    protected $limitAction = [
-        'indexAll'
-    ];
-
     /**
      * @var $model ArticleModel
      */
