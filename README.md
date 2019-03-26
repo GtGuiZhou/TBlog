@@ -152,4 +152,4 @@ Your requirements could not be resolved to an installable set of packages.
 
 ```
 
-
+# 基于thinkphp的swoole定时器好像有问题，发现php --ini莫名其妙变成了和nginx一样的配置，现在可以直接使用php命令来做定时任务了。

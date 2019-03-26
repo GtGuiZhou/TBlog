@@ -12,3 +12,6 @@ php think optimize:schema
 # 生成路由映射缓存的命令
 echo '生成路由映射缓存...'
 php think optimize:route
+
+# 自定义命令
+php think sync_article_tags # 同步标签

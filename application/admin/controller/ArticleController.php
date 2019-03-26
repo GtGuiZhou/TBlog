@@ -17,6 +17,10 @@ class ArticleController extends AdminBase
 
     protected $groupTableName = 'sys_article_group';
 
+    protected $limitAction = [
+        'indexAll'
+    ];
+
     /**
      * @var $model ArticleModel
      */
@@ -25,6 +29,7 @@ class ArticleController extends AdminBase
     protected function initialize()
     {
         $this->model = new ArticleModel();
+        parent::initialize();
     }
 
 }
