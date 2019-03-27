@@ -3,6 +3,7 @@
 namespace app\command;
 
 use app\common\ext\RedisPool;
+use app\common\model\ArticleModel;
 use app\common\model\SysConfigModel;
 use Exception;
 use think\console\Command;
@@ -27,15 +28,22 @@ class SyncArticleTags extends Command
         $redis = RedisPool::instance();
         // 将mysql中的标签先同步到redis中
         try{
-            $config = SysConfigModel::where('field',$key)->findOrFail();
-            $tags = $config['value'];
+            $tagsModel = ArticleModel::field('tags')->select();
+            $tags = [];
+            foreach ($tagsModel as $model){
+                $tags = array_merge($tags,$model['tags']);
+            }
             $redis->sAddArray($key,$tags);
             $tags = $redis->sMembers($key);
-            $config->isUpdate(true)->save(['value' => $tags]);
+            $config = new SysConfigModel();
+            $config = $config->where('field',$key)->findOrFail();
+            $config->save(['value' => $tags]);
+//            SysConfigModel::where('field',$key)->update(['value' => $tags]);
             $output->writeln('同步文章标签完成');
             Log::notice('同步文章标签完毕');
         } catch (Exception $e){
             Log::error("同步文章标签失败:".$e->getMessage());
+            $output->writeln($e->getMessage());
         }
     }
 }

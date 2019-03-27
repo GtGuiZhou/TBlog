@@ -10,7 +10,9 @@ namespace app\common\controller;
 
 
 use think\Controller;
+use think\db\Query;
 use think\exception\ValidateException;
+use think\Model;
 
 class CrudBase extends Controller
 {
@@ -44,6 +46,13 @@ class CrudBase extends Controller
      * @var array
      */
     protected $limitAction = [];
+
+    /**
+     * 可以在这里定义执行index方法时的查询条件
+     * @var \Closure
+     */
+    protected $indexWhere;
+
     protected function initialize()
     {
         $this->limitActionCheck();
@@ -68,7 +77,7 @@ class CrudBase extends Controller
         }
 
         if($isExcept){
-            $except = explode(',',$this->limitAction['only']);
+            $except = explode(',',$this->limitAction['except']);
         }
 
         if (!$isOnly && !$isExcept)
@@ -91,15 +100,21 @@ class CrudBase extends Controller
      */
     public function index()
     {
+
+        if(!$this->indexWhere)
+            $this->indexWhere = function (Query $query){};
+
         $order = input('order', 'desc');
         $index = input('index', 1);
         $size = input('size', 10);
 
         $list = $this->model
+            ->where($this->indexWhere)
             ->order($this->model->getPk(), $order)
             ->page($index, $size)
             ->select();
         $total = $this->model
+            ->where($this->indexWhere)
             ->count($this->model->getPk());
         return success(['list' => $list,'page' => [
             'index' => (int)$index,'size' => (int)$size,'total' =>  (int)$total

@@ -18,9 +18,8 @@ $register_curd = function ($rule) {
 
 $register_curd('admin/article');
 
-soft_delete_router_set('admin/article');
+\think\facade\Route::get('api/article/index/:tag?','api/article/index');
 
-crud_router_set('api/article');
 
 \think\facade\Route::get('api/article/star/:id','api/article/star')
     ->middleware('common/lib/StarValidateIpMiddle');

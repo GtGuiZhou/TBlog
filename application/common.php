@@ -91,3 +91,5 @@ function user_is_login(){
 function throw_validate_exception($err, $code = 0){
     throw  new \think\exception\ValidateException($err,$code);
 }
+
+

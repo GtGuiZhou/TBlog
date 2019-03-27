@@ -28,7 +28,7 @@ class ArticleModel extends BaseModel
     }
 
     public function setTagsAttr($value){
-        return json_encode($value);
+        return json_encode($value,JSON_UNESCAPED_UNICODE);
     }
 
     public function getTagsAttr($value){
